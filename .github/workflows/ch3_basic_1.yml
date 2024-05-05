@@ -1,20 +1,28 @@
 ---
 name: PART3 - CH3 - Job Basic Sample
+# 수동 선택하여 git action을 실행
 on: workflow_dispatch
 jobs:
+  # 빌드라는 id의 job 실행
   build:
+    # job의 이름은 build and test
     name: Build and Test
+    # job의 러너는 ubuntu
     runs-on: ubuntu-latest
     steps:
+    # 체크아웃은 브랜치를 가져옴, 필수
     - name: Checkout 
       uses: actions/checkout@v2
+    # 빌드라는 스텝
     - name: Build project
       run: |
         echo "Build Project"
     - name: Run tests
       run: |
         echo "Run Test"
+  # deploy라는 id의 잡
   deploy:
+    # job의 이름은 deploy to prd
     name: Deploy to production
     needs: build
     runs-on: ubuntu-latest
